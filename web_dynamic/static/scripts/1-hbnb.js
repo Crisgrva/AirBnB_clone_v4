@@ -1,15 +1,21 @@
-let amenities = [];
-function ToArray (amenities) { // wrong this is to take the list im creating below
+const amenities = []; // has to be a constant value
+function ToArray (amenities) { // this is to take the list i'm creating below
   $('.amenities H4').text(amenities.join(', ')); // taking h4 text contents into list
-}  // this function turnsthe list to an array
+}  // this function turns the list to an array
 
 function checkbox () {
   $('.amenities input').on('change', function () {
-    let checker = $(this)[0].checked; // take the element to see if it is checked
+    const checker = $(this)[0].checked; // take the element to see if it is checked
     if (checker == 'true') {
-      amenities.push($(this).data('name')) // storing value
+      amenities.push($(this).data('name')); // storing value
+    } else {
+      for (let x = 0; x < amenities.length; x++) { //parsing actual list
+        if (amenities[x] === $(this).data('name')) { // comparing values
+          amenities.splice(x, 1); // if it's on this list it is deleted
+        }
+      }
     }
-    ToArray(amenities) // sending to convert list to array
+    ToArray(amenities); // sending to convert list to array
   });
 }
 
